@@ -1,0 +1,27 @@
+{
+  "name": "block",
+  "version": "1.0.0",
+  "description": "blockchain projects kidney donation",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node --index.js"
+  },
+  "keywords": [
+    "Blockchain",
+    "Nodejs",
+    "ExpressJs"
+  ],
+  "author": "Shavej",
+  "license": "ISC",
+  "dependencies": {
+    "nvm": "0.0.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-preset-es2015": "^6.24.1",
+    "web3": "^1.2.6"
+  }
+}

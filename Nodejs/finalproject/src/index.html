@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/web3.min.js"></script>
+  <script src="js/truffle-contract.js"></script>
+  <script src="js/app.js"></script>
+  <title>Home | Kidney Donation</title>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="#">Kidney Donation</a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link" href="/index.html">Home<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/profile.html">Profile</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="/about.html">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" id="accountAddress" style="float: right;"> Account</a>
+            </li>
+          </ul>
+      </div>
+    </nav>
+
+          <div class="row">
+          <div class="col-md-8">
+            <h2 style="padding-top: 20px;">Donation Form</h2>
+            <h3 style="margin-top: 0px;margin-bottom:30px"></h3>
+            <form onSubmit="App.storedata(); return false;">
+
+              <div class="form-group">
+                <label class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-4"> 
+                  <input class="form-control" type="text" id='name'/>
+                </div>
+              </div>
+              <br/>
+              <br/>
+    
+      
+              <div class="form-group">
+                <label class="col-sm-2 col-form-label">Select Blood Group</label>
+                <div class="col-sm-4"> 
+                  <select class="custom-select" id="blood_group">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="AB">AB</option>
+                    <option value="O">O</option>
+            
+                  </select>
+                </div>
+              </div>
+      
+      
+              <br/>
+              <br/>
+      
+              <div class="form-group">
+                <label class="col-sm-2 col-form-label">Enter City</label>
+                <div class="col-sm-4"> 
+                  <input class="form-control" type="text" id='city'/>
+                </div>
+              </div>
+              <br/> <br/>
+      
+              <div class="form-group">
+                <label class="col-sm-2 col-form-label">Enter Mobile</label>
+                <div class="col-sm-4"> 
+                  <input class="form-control" type="text" id='mobile'/>
+                </div>
+              </div>
+              <br/> <br/>
+      
+              <div class="form-group">
+                <label class="col-sm-2 col-form-label">Select Donor/Receiver</label>
+                <div class="col-sm-4"> 
+                  <select class="custom-select" id="door">
+                    <option value="0">Donor</option>
+                    <option value="1">Receiver</option>
+            
+                  </select>
+                </div>
+              </div>
+              <br/>
+              <br/>
+              <div class="form-group">
+                <label class="col-sm-2 col-form-label">Enter HLA</label>
+                <div class="col-sm-4"> 
+                  <input class="form-control" type="text" id='hla'/>
+                </div>
+              </div>
+              <br/>
+              
+              <button type="submit" class="btn btn-secondary" style="align-items: center;">Submit</button>
+            </form>
+          
+          </div>
+          </div>
+        </div>
+        <br><br>
+
+
+
+    
+       <div class="row">
+          <div class="col-md-8">
+            <!-- <p id="trans" class="text-center"></p> -->
+            <div class="container" style="width: 650px;">
+              <div class="row">
+                <div class="col-lg-12">
+                  <h1 class="text-center">Kidney Donation Candidate</h1>
+                  <hr/>
+                  <br/>
+                  <p id="trans1" class="text-center"></p>
+                  <div>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Account</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Blood Group</th>
+                          <th scope="col">Donor/Receiver</th>
+                          <th scope="col">Mobile</th>
+                          <th scope="col">HLA</th>
+                          <th scope="col">City</th>
+                        </tr>
+                      </thead>
+                      <tbody id="candidate">
+                      </tbody>
+                    </table>
+                    <hr/>
+                    <!-- <p id="don" class="text-center"></p>  -->
+                  </div>
+                </div>
+              </div>
+            </div>
+        
+            </div>
+            </div>
+          </div> 
+     </div>
+
+
+
+
+     
+
+
+  
+ 
+</body>
+</html>

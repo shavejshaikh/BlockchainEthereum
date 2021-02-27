@@ -1,0 +1,143 @@
+Commands:
+
+Run Start a Container :
+
+1. docker run nginx
+
+ps - list containers:
+
+1. docker ps (Running)
+2. docker ps -a  (All container)
+3. docker stop silly_sammet
+
+Rm - Remove a container 
+
+1. docker rm 
+
+
+Docker Networking:
+1. Default Networks
+	Bridge : Private N/w
+		docker run ubuntu :port 172.17.0.1
+	None : 
+		docker run ubuntu --network=none 
+	Host :
+		docker run ubuntu --network=host
+		
+docker network create \
+	--driver bridge \
+	--subnet 182.18.0.0/16
+	custom-isolated-network
+docker network ls
+
+docker inspect blissful_hopper
+
+Embedded DNS : mysql.connect( mysql )
+
+docker Storage:
+
+file System:
+	/var/lib/docker
+		aufs
+		containers
+		images
+		volumes
+
+Layered Architecture:
+
+layer 1: Base Ubuntu Layer
+layer 2: Changes in apt packages
+layer 3: Changes in pip packages
+layer 4: Source Code
+layer 5: Update Entrypoint
+layer 6: Container Layer 
+
+layer 0-5 : Image Layers
+layer 6 : Container layers
+
+docker build Dockerfile -t mnumshad/my-custom-app
+docker run mnumshad/my-custom-app
+
+
+docker run ubuntu-sleeper sleep 10
+docker run ubuntu-sleeper 10 ENTRYPOINT["sleep"]
+
+docker volume create data_volume
+
+docker run -v data_volume:/var/lib/mysql mysql
+docker run -v data_volume2:/var/lib/mysql mysql
+docker run -v /data/mysql:/var/lib/mysql mysql
+
+docker run \
+--mount type=bind, source=/data/mysql,target=/var/lib/mysql mysql
+
+Storage Drivers:
+1. AUFS
+2. ZFS
+3. BTRFS
+4. Device Mapper
+5. Overlay
+6. Overlay2
+
+Docker Compose:
+
+docker-compose.yml
+services:
+     web:
+	image: "simple-webapp"
+     database:
+	image: "mysql"
+    messaging:
+	image: "redis:alpine"
+orchestration:
+	image: "ansible"
+
+Run Commands:
+	docker-compose up
+
+
+docker run -d --name=redis redis
+docker run -d --name=db postgres:9.4 
+docker run -d --name=vote -p 5000:80 voting-app
+docker run -d --name=result -p 5001:80
+docker run -d --name=worker worker
+
+
+dcoker run --links
+
+docker run -d --name=redis redis
+docker run -d --name=db postgres:9.4 --link db:db result-app
+docker run -d --name=vote -p 5000:80 --link redis:redis voting-app
+docker run -d --name=result -p 5001:80 
+docker run -d --name=worker worker --link db:db --link redis:redis worker
+
+
+docker-compose.yml
+
+redis:
+ image: redis
+
+db:
+ image: postgres:9.4
+
+vote:
+ image: voting-app
+ ports:
+   - 5000:80
+
+result:
+  image: result-app
+  ports:
+    - 5001:80
+
+worker: 
+  image: worker
+  links: 
+     - redis
+     - db
+
+
+docker run --cpus=.5 ubuntu
+docker run --memory=100m ubuntu
+
+

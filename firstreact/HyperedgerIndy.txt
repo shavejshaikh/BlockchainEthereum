@@ -1,0 +1,556 @@
+################################# Hyperledger Indy #####################################
+
+******************************** Why Indy is Use ??? ******************************** 
+Since there are 3 scenario in which :
+1. Alice is graduated from Watumull college and get a job opporunity in TCS company , to show he is graduated from Watumull he need 
+to show credential i.e transcript or Mark sheet to get verified.
+2. Now Alice is working in TCS if he want to take home loan from SBI Bank then he need to show employment status and identity, i.e KYC.
+3. Since Job certificate issue by TCS Alice have 2 credentials i.e One from Watumull College and TCS Company.
+4. He can submit it for a car loan
+In this case:
+i.   Alice : prover and credential Holder
+ii.  Watumull College and TCS Company : Credential issuers
+iii. SBI BANK : Credential Verifier
+
+*****************************  How Indy Solve this Problem ?  ******************************
+
+Step 1 : Government issues the Transcipt Schema and Job Certificate Schema and records them onto the ledger. This schemas are accessible to everyone
+Step 2 : Watumull College and TCS Company create their own Credential definitions:
+	 i.If they adopt these schemas. In this example faber College ad Acme Corp creates their own credential definitions based on the schemas issued
+	 by Government.
+	ii. Since both are record are recorded in the ledger it can be accessed by anyone.
+Step 3 : Alice obtains a Credential From Watumull College regarding the transcript
+	 Here are the detail Steps:
+      	 i. Build a connection between Watumull College and ALice.
+	 ii.Watumull college creates and sends a Credentials Offer to Alice.
+	 iii. Alice retrieve the "Watumull College Transcript Credentials" from the ledger, and creates a Credential Request and sends it to Watumull College.
+	 iv. Watumull College creates the Credential for Alice . Inside the credentials it contain all the items listed by " Watumull Transcript Credential Definition"
+	 v. Alice now receives the Credentials and store it in her wallet
+Step 4 : TCS Company requests proof of education level from Alice
+Step 5 : Alice obtains a Credential from TCS Company regarding the employment Status
+Step 6 : SBI Bank requests proof of employment status and KYC from Alice
+
+Important Terminology:
+Items recorded in the ledger are :
+1. All Decentralized Identifier (DID) , verinym and pairwise-unique DID, and corresponding Verifying Key (verkey).
+2. Schemas, which defines the structure of items referred by both credential definitions and credentials
+3. Credenitial definition, which is built on top of a schema plus a issuer's information for proof creation.
+All these items are publicly accessible, and therefore is NOT secret at all to any organizations or individuals.
+
+
+*************************************** Internet ****************************************
+
+1. Trust is not a part of using the internet.
+2. We are trained to not believe what is said on the internet , to not click links that we are unsure of.
+3. If we want to do something important then we don not use internet.
+4. When we interact in the real world , we often neet to "prove" who we are.
+5. We present some evidence we have about overselves.
+6. When we open a bank a/c we show documents such driver liense government bills etc.
+7. The same pattern is used online but there are a variety of problems occur, some obvious some a little more subtitle
+
+**************************** Identity use IDs and Passwords ****************************
+
+The basic mechanism for knowing who you are on the internet is the userID and passwords combination.
+Register at at site and get user ID and set strong passwords.
+
+
+*************************** Issue with user IDs and passwords are ***********************
+
+1. We have too many to track
+2. Because we have so many we often use "easy to remember" passwords that are also easy for others to guess.
+3. We often use the same passwords on many sites nd if any one passwords is know then it is very easy to hack any other sites.
+
+
+************************************* Solve ********************************************
+
+1. To solve " to many passwords " problem is the use of Identity Providers(Idps) such as Facebook and Google.
+2. A problem with that approach is that each time an IDP is used , the Idp learns things about us - our habits, our interests what sites we use and soon , 
+Our Privacy is lost.
+3. While users of websites have IDPS for the site, the reverse is not the case , this has enabled "phishing" tech to become common in recent years, 
+where users are tricked to click a link that Takes them to a website that appears to be real, has a similar name, but is actually fake (for example, goog1e.com).
+4. This fools us into revealing our users ID and password and sometimes even into revealing our two-factor authentication code for the real sites.
+
+
+******************************** Identity Attributes ******************************** 
+
+Almost every sites we share other identities to use a service- our email and name at minimum and depending on the nature of the service ,additional info (address, credit card etc).
+
+
+********************************  Unwanted Correlation ********************************
+
+1. The use of common identifiers on so many different sites creates what is known as a correlation problem.
+2. The proliferation of this kind of correlation on the internet, driven primarily by advertising, has resulted in a massive loss of privacy for internet users.
+3. Correlation is made possible because of the common identifiers we use online daily.
+4. Email address is the single largest factor since we share it on almost every site but there are others.
+5. Each time we use the same a/c name on a different sites we create the possibility of correlation.
+6. When we give other identities about overselves (eg. phone no, address, government id etc), firms can correlate the data across the sites.
+7. Idps model is also a also a correlation point-although in this case, one given with consent.
+8. IDps approach trades convenience for correlation . Since the Idps is used for each login the idps can track us of other sites and thus correlate your online 
+   activities, increasing their knowledge of you.
+
+
+
+********************************  Verifiable Credentials Model ******************************** 
+
+1. An authority decides you are eligible to receive a credential and issues you one.
+2. Hold your credentials in digital wallet
+3. You are asked to prove the claims from the credentials.
+4. You provide a verifiable presentation to the verifier proving the same things as with a paper credential.
+5. You can prove that the issued credentials has not been revoked.
+
+####### Cryptographically constructed so that presentation proves the four key attributes of all credentials #######
+
+1. Who issued the credentials.
+2. The credentials was issued to the entity presenting it.
+3. The claims were not tempered with.
+4. The credentials has not been revoked.
+
+Note : Credentials are Json docs, constructed and digitally signed by an issuer and countersigned by the holder.
+Proof: A proof is evidence of the claim eg. Birth certificate etc.
+
+
+*********** Self Sovereign identity and the aspects of Indy Aries and Ursa architecture ***********
+
+It is a term may have heard in connection with the Hyperledger identity projects, Indy, Aries and Ursa.
+Hyperledger capabiltities can be the basis for accomplising SSI .
+SSI is the idea that you control your own data, you control when and how it is provided to others.
+
+
+********************************  DID ( Decentralized Identity ) ********************************
+
+Syntax URL : did    :   sov    :  3K9g265485ghdcd84s154cd57s12ccd45
+            {Scheme}  {Method}      {Method specific Identifier}
+
+->Which ledger is asssocialted with
+   How to resolve it 
+   Individuals will have hundreds or thousands of DIDs to control correlation based on their needs.
+   Each one is a contextually unique pseudonym
+
+	 
+->DIDs are:
+   1.A new type of uniform resource location (URL).
+   2.Created by anyone at anytime.
+   3.Globally unique. 
+   4.Highly available.
+   5.Cryptographically verifiable.
+
+
+********************************  Zero knowledge proof and selective disclosure ******************************** 
+
+i. Zero knowledge protocol is a method by which one party (the prover) can prove to another party (the verifier) 
+   that something is true, without revealing any information apart from the fact that this specific statement is true.
+ii.A zero-knowledge proof (ZKP) is about proving attributes about an entity (a person, organization or thing) 
+   without exposing a correlatable identifier about that entity. Formally, it’s about presenting claims from 
+   verifiable credentials without exposing the key (and hence a unique identifier) of the proving party to the verifier.
+iii.A ZKP still exposes the data asked (which could uniquely identify the prover), but does so in a way that proves 
+   the prover possesses the issued verifiable credential while preventing multiple verifiers from correlating the 
+   prover’s identity. Indy, based on underlying Ursa cryptography, implements ZKP support.
+
+Example:
+
+Without Zero Knowledge Proofs                                  With Zero Knowledge Proofs
+__________________________________                              ___________________________
+|Name : John Doe 		 |				|                         |
+|Adresss: 123, Neveb St Phoenix, |                              |                         |
+|Az-850001                       |                              |  OVER    21             |
+|Birth Date : 01/01/1998         |                              |                         |  
+|________________________________|                              |_________________________|
+
+
+********************************  Self sovereign Identity ********************************
+
+---> Three Planes of Self Sovereign Identity:
+1. Relationship Axis:
+	You don't look the same to everyone.
+2. Attribute Axis:
+	You have a vast collection of attributes
+	Eg. DOB, Health, Bank History
+3. Agent Axis:
+	You have agents that help you do things.
+
+
+*************************** Hyperledger IndySDK ***********************
+
+1. Assists with interaction of a ledger
+2. Comes with a general purpose storage solution called a wallet with Standard Interface.
+3. Agent to Agent protocol feature built into facilitate peer to peer interactions.
+4. Written in rust with c-callable APIs for easy wrapper maintainability.
+
+
+*************************** Hyperledger Indy Agent ********************
+
+1. Built using functionality from IndySDK
+2. Extensible to different "message families" allowing for applications to build around a
+
+
+*************************** Identity Extension ************************
+
+Easy way to build Indy into existing applications if an agent already exists on the device
+
+
+**************************** Aries *******************************
+
+1. Aries is a toolkit designed for initiatives and solutions focused on creating, transmitting, storing and using verifiable digital credentials.
+2. Messaging in Aries is defined at several conceptual layers:
+	i. At the lowest is just the ability for one agent to send a chunk of data, and for another agent to receive that data and understand it. 
+       ii. At the next layer is the ability for agents to exchange a sequence of messages to accomplish some shared task.
+       iii.That’s a protocol. Messaging protocols are just like human protocols.
+3. DIDComm (DID Communications) protocol that covers the envelopes used to address and send messages from agent to agent, 
+   and content protocols—messages with specific data used between agents to accomplish a task.
+4. DIDComm uses the data associated with DIDs (public keys and service endpoints) to secure and address messages, respectively. 
+5. DIDComm is an extremely powerful capability.
+
+
+**************************** Ursa ********************************
+
+1. Ursa takes the raw cryptographic algo and packages them up so that they can be embedded in for indy and aries and used safely.
+2. When a message is sent from one Aries agent to another, it is encrypted and packaged up via a call to an Ursa function.
+3. If you are building applications on top of Aries and using the Indy ledger and verifiable credentials, it’s all hidden from you
+4. Calls your application makes to Indy and Aries functionality in turn make calls to Ursa to handle the cryptography needs
+
+
+
+*************************** Indy  ********************************
+
+1. Hyperledger Indy is the core component of Hyperledger’s identity system
+2. Implements the public distributed ledger technology (DLT) and the code to build applications that interface with the ledger.
+3. Indy sdk : a software development kit that enables Indy clients (called “agents”) to be built that interact with the Indy blockchain
+   Indy-node: the blockchain/DLT component of Indy.
+4. Indy is its ledger does not support any form of querying by value or discovery.
+5. The ledger interface capabilities in the indy-sdk will remain in Indy as the SDK capabilities are split across Indy and Aries
+6. The indy-sdk provides a pluggable API for the storage, meaning a capable developer can create another storage implementation should they need one. 
+   By default, Indy uses the open source SQLite database, PostgreSQL database for enterprise deployments.
+7. It use key-value pair for data storage.
+8. Storage is logically divided into two parts:
+	i. Secrets      : Data associated with ledger entries and verifiable credentials.
+	ii. Non secrets : Any other data stored by an application in the database.
+9. Security reasons, operations that use private keys happen within the storage API code—the private keys are never handed out to "user code" 
+10.The Indy blockchain plays a crucial role in enabling trust on the Internet, but when you are building applications using the technology, 
+   the focus is much more on the agents, relationships between agents and on the entities that control them.
+11.Indy ledger is immutable—written once and never changed. 
+12.Since Indy is focused only on identity, it does not support the concept of assets being exchanged (with a caveat, mentioned below), 
+   nor any sort of smart contract capability.
+13.A caveat to the point about Indy not being about the exchange of assets
+14.Anyone operating an Indy network can write a library that implements what happens when those API calls are made. 
+15.Indy’s reference implementation is called "libnullpay," meaning that when the API is called it just returns with no action taken.
+16.Indy contents can be seen by only pre- approved participants knows as stewards are premitted to participate in the validation process
+
+
+**************************** Consensus ****************************
+
+1. Hyperledger Indy uses a consensus algorithm to decide the contents of the next block added to the chain.
+2. Indy uses Plenum, an implementation of a Byzantine Fault Tolerance(BFT) Algorithm.
+ 
+
+************************* Sovrin Foundation ***********************
+
+1.The Sovrin Network is a single, global instance of Hyperledger Indy. Each node is operated by a Sovrin steward, an organization 
+  (company, government, university, etc.) that has agreed to a legal agreement 
+  that defines how they will operate their node (minimum hardware, network access, monitoring, security, maintenance, etc.) 
+2.It a Foundation to storage ledger and transaction.
+
+
+********************* What Goes on the Blockchain ****************************
+
+1. Public DID:
+   When a issuer want to issue a credential, they must have a DID on the Blockchain that allows verifiers to find out who they are
+   and in the process, why the credentials they issue can be trusted.
+
+2. Schemas:
+   The issuer MAY put a schema on the blockchain that says in effect, "When I issue a credential, it's going to have these fields in it." 
+   An issuer might put their own schema on the ledger, or they can use one that someone else put on the ledger. 
+   In the current iteration of Indy, the schema is just a list of attribute names
+
+3. Credential Definitions:
+   Before an issuer can issue a credential using a schema, they MUST put a credential definition on the blockchain. 
+   A credential definition says, "I'm an issuer using this DID, I'm going to use that schema for my credentials,
+   and here are the public keys (one per claim) that I’m going to use to sign the claims when I issue a credential." 
+   In all, an issuer must have a DID, a schema and a credential definition on the blockchain before issuing credentials.
+
+4. Revocation Registry:
+  The issuer MAY want to be able to revoke credentials and if they do, they must also write a revocation registry to the ledger before issuing credentials. The revocation registry links back to the credential definition, and allows the issuer to unilaterally revoke credentials, independent of the holders. No one can look at the revocation registry to see if a specific credential has been revoked. But, with the magic of a zero-knowledge proof (ZKP), a holder can prove (and a verifier can verify) that the holder’s credential has not been revoked—provided of course it has not been revoked. This action is taken by the prover when creating a presentation.
+
+
+What is an Agent ??
+Aries agent is a piece of software that enables an entity (a person, organization or thing) to assume one or more of the roles within the verifiable 
+credential model—an issuer, holder or verifier—and allows that entity to interact with others that also have verifiable credential roles
+Agents use private, pairwise DIDs to secure their peer-to-peer communications.
+With a different pairwise DID for every relationship, each with keys and end points that you control, communication between agents is end-to-end encrypted, secure and safe
+
+Personal Agent ??
+For a person, an agent will most commonly be a mobile app that feels much like the messaging apps you use today—WhatsApp, Messenger, etc. Your mobile agent will help you establish connections, manage the set of relationships you’ve created, and you will exchange messages with those connections. Some of those messages you receive will be offers of credentials and others will be requests for your to prove claims from one or more of those credentials
+
+Enterprise Agent ??
+An enterprise, like a company or a department within a government, will have agents that run on servers to verify proofs of claims submitted by their clients and issue credentials to clients.
+For example, a health department, prior to issuing an operating permit, might use an Aries agent that messages with the Aries agent of a bakery owner to verify (using proofs) that:
+
+            The bakery is appropriately registered as a company.
+            Has proper insurance.
+            Has received safe food handling certification.
+
+Device Agent ??
+Internet of Things (IoT) devices might embed agents capable of issuing verifiable credentials based on data from the device’s sensors.
+The devices themselves might be certified by a standards organization, and by immediately putting the sensor data into a verifiable credential,
+the data can be tied to the device and proven not to be tampered with as it is used.
+For example, sensors in your car can generate verifiable credentials to track mileage and maintenance on the vehicle and so that the data can be proven when the car is sold
+
+Routing Agent ??
+These are agents that serve as intermediaries to facilitate the flow of messages between other types of agents
+Because you cannot directly address a mobile agent across the Internet, a primary example of a routing agent is one that allows a mobile agent to send and receive messages. For example, an enterprise agent (or any other piece of software) can’t send a message containing (for example) an offer of a credential directly to a mobile agent (or any other app) on Alice’s phone. 
+It’s just not technically possible. Instead, a mobile agent must have something that holds its messages until that mobile agent asks for them
+And, like the postal system, a routing agent should not know anything about the contents of a message, just where the message needs to go.
+As such, whenever a routing agent is involved in handling a message, the sender puts the message into an envelope so the agent can’t see the message, just where it’s supposed to go. 
+As you might imagine, such handling is done with encryption
+
+
+Edge Agents and Cloud Agents ??
+Edge agents are controlled directly by their owning entity, must be trusted by that entity and must be managed using appropriate security so as to prevent a loss of control and hence, trust.
+Cloud agents are operated by other than their owner and as such should be trusted less than an edge agent. 
+For example, they can be trusted to facilitate messages that are encrypted such that they cannot read them. And, a cloud agent owner may trust them for some other purposes beyond just routing.
+
+Cloud agents facilitate the messaging by, for example, providing a permanent endpoint for a device that may or may not be online at the time messages are being received.
+The edge agents are handled by the identity owners themselves—in this case, a consumer and an enterprise
+
+Categorizing Agents ??
+Agents are software and as such, can be extended and deployed in endless ways. For particular use cases, agent type functionality can be mixed and matched
+while you can use these categories as guidelines, remember that they are not the only possibilities.
+The important thing to consider as you think about going beyond these categories is the risk that the owner may lose control of the agent, that others may be able to gain access to the messages, keys and data associated with the agent
+
+Agent Components/Architecture ??
+
+1. Key Management Service (KMS):
+An Aries agent (usually) has secure storage (called the key management service (KMS)) that is used for all of the information collected by the agent.
+At a low level, an Aries KMS is wrapper code around a standard database for storing DIDs, keys, connections, credentials and any other information the agent tracks
+KMS implementations are pluggable (new implementations can be independently created and used) and two reference implementations have been created for a range of use cases
+A SQLite implementation can be used for small-scale agents, and a PostgreSQL implementation can be used for enterprise scalable deployments 
+(SQLite might be used on a mobile phone to store thousands of records, Postgres on a server to store millions (or billions) or records). 
+In either case, (almost) everything in the database is encrypted before it is stored.
+KMS, including creating, storing, querying, retrieving, encrypting, decrypting, signing and verifying data, is only possible through calls to the KMS code.
+This layering is to prevent private keys from being accessed by generic agent code written by an arbitrary developer. 
+Keeping keys secured within the open source KMS reduces the risk of security vulnerabilities in "user" code resulting in keys being exposed.
+
+2.Agent Messaging Interface :
+The agent messaging interface enables an agent to establish and manage connections with other agents and send and receive messages to those agents.
+The mechanisms an agent supports to transmit and receive messages depends on where that agent is deployed.
+Aries uses DIDComm (DID Communication) messaging protocols and is designed to be "transport-agnostic" meaning that any communication method can be used to send messages.
+Many agents use HTTP (or HTTPS) to send and receive messages, but any mechanism can be used for a given agent—web sockets, SMTP (email), XMPP, even hand-written notes (really!) can be used for transporting messages.
+This is possible because the entire Aries message is encrypted (using Ursa), assembled into a standard structure (using JSON Web Encryption (JWE)), converted into a string of characters (usually using base64 encoding) and then sent as the payload using the selected transport mechanism
+Anyone looking at the message sees only a really long string of characters.
+The intended recipient reverses the process to get back the delivered Aries message.
+The basic structure of Aries messages and the encoding/decoding of the messages during delivery is defined by the DIDComm envelope protocol.
+
+
+3. Ledger Interface :
+Reading and Writing DIDs and other transactions to/from the ledger.
+The difference in Aries versus Indy is that the ledger interface is pluggable, allowing an Aries agent to interact with multiple ledger and verifiable credential eco-systems
+An Aries ledger interface will likely to be broken into three parts:
+
+            DID resolver:
+		there were just two DID methods supported in Aries agents—public DIDs on the Sovrin network and private, pairwise DIDs.
+		the work to resolve any DID can be done by code within an Aries agent by deploying a pluggable resolver for each DID method
+		The plan to solve that in Aries is to use a centralized universal DID resolver service
+		If a DID is encountered that cannot be resolved using local code, it is sent to the universal resolver, which will (try to) support all DID methods and it will complete the resolution and return the result.
+
+            Writing mechanism
+		Write data on the ledger.
+		This must be implemented within the Aries agent to ensure full control over the private keys involved in the transactions.
+		Different ledger implementations will involve writing different transactions to the ledger, resulting in both the code and interface being different per ledger implementation
+            	
+	    Verifiable credential handler
+		interface is likely to be pretty much the same across implementations, with essentially the same sequence of events occurring for issuing credentials and presenting proofs.
+		 the specific actions within the steps will likely be different from one verifiable credential implementation to another. 
+		The actions to process an Indy zero-knowledge proof are quite different from the presentation of a credential-based proof.
+
+4. Controller :
+The element that gives the agent its personality.
+The controller provides the "business rules" (for lack of a better term) that define what actions the agent will initiate and how the agent will respond to events
+For a mobile agent, the controller is a mobile user interface that presents the options to a person who then supplies the business rules
+For a verifiable credential issuer/verifier-style enterprise agent within an organization, the controller might be a legacy database system that manages customer data. 
+Such an agent might enable customers to submit data by presenting claims from verifiable credentials instead of typing the information into a web form. 
+That is a win for the organization—better quality data that does not need to be manually reviewed and verified, and a win for the customer—less typing and faster responses 
+because the data does not need to be manually verified.
+A controller is the software you build around Aries. 
+All the capabilities that make up Aries go into the agent, and then you, as an external party, write the code (and business rules) to create an agent-enabled application.
+
+
+Peer to Peer Messaging:
+Aries agent is peer to peer messaging connecting agent to agent to send and receive message to and form those agent to accomplish some interaction.
+The interaction might be a plain text , or more complex such as negotiating the issuing of a credential or the presentation of proof.
+Aries, there are two levels of messaging protocols :
+
+1. The lower levels is DIDComm envelope protocols:
+ 	The methods by which messages are exchange and use postal code similar to post office.
+	When sender want to send any message i.e "Hi How are You !" and also depend recipient address i.e postal code.
+	When the help of postal code it will develiver the message to the door step of recipient.
+	It doesn't care about the content of a message, just the methods by which it should be delivered.
+		
+2. The Higher level is DIDComm content protocols:
+	Hundred of protocol are defined back and forth sequence of specific messages to accomplish a specific goals.
+	The simpliest form is one agent is sending a messages to other agent i.e ("Hi How are You!")
+	A much more complex protocol is issuing an Indy-style credential, where it takes at least three messages back and forth to offer, 
+	request and issue a credential. 
+	The set of messages, the roles of the participants, plus some extra details such as acknowledgments and error handling, 
+	define each of the many DIDComm content protocols.
+	The DIDComm content protocol is reverse of DIDComm envelope protocol it care about content of messages.
+
+
+Aries Messaging Establishing a Connection :
+
+1. Establishing a Connection => Invitation:
+	Since one agent doesn't have any information about other ageent or DID of other agents.
+	The common way to make connection between two agent using QRCODE.
+	One agent generate QRCODE and other agent scan it and make connection between them
+	The invitation can be sent in other ways as well: emailed, displayed on a screen and copied/pasted, written on paper, etc. 
+	Basically, any method of sending text from one agent to another
+	The invitation is a chunk of plaintext (not encrypted) data (in JSON) that contains a unique identifier and the same sort 
+	of information that is in a DIDDoc—notably a public key and a service endpoint. 
+	It is the way an inviter says to the invitee "Hey, connect with me!". 
+	The invitation is in plaintext because the inviter has no public key for the invitee with which to encrypt the message.
+
+2. Establishing a Connection: The Connection Request:
+	With the invitation in hand, the invitee can use the public key and service endpoint to get a secure message to the inviter.
+	If the invitee wants to accept the invitation, it creates a new DID and DIDDoc for the relationship that is being formed and 
+	places the invitation identifier and the new DIDDoc into a connection-request content protocol message.
+	It also creates a connection record and saves it in its own DID and DIDDoc from the invitee.
+	It then creates a DID and DIDDoc, saves it in the connection record, and packages the data into a connection-response content protocol message.
+	That message is packaged (using the DIDComm envelope protocol) and sent to the invitee. 
+	The DIDcomm envelope protocol is used to package the content protocol message, encrypting it using the public key from the 
+	invitation and sending it to the service endpoint in the invitation.
+
+3.Establishing a Connection: The Connection Response:
+	The inviter listening for messages on the service endpoint receives the message from the invitee and decrypts it to find the connection-request message.
+	The invitation identifier in the message informs the inviter with what invitation to associate this message. 
+	It then creates a DID and DIDDoc, saves it in the connection record, and packages the data into a connection-response content protocol message. 
+	That message is packaged (using the DIDComm envelope protocol) and sent to the invitee.
+
+4.Establishing a Connection: The Connection Establishment:
+	When a invitee receive the messages, it save the other agents DID and DIDDoc in the connection record and the connection is established.
+	The two agents are connected with a secure, private, end-to-end encrypted messaging channel.
+	That’s huge! Of course, the parties still don’t know much about each other (just each other’s DIDs), but that can come after—by exchanging proofs 
+	
+The Issue Credential Protocol :
+The issue credential protocol is used to enable an issuer to provide a holder with a verifiable credential
+	In this protocol:
+            There are two participants (issuer, holder).
+            There are four message types (propose, offer, request and issue).
+            There are four states (proposed, offered, requested and issued).
+
+
+ARIES RFC CYCLE :
+
+		Accepted-----Adopted
+		|               |
+	   Demonstrated	     Retired
+		|		|
+		----Proposed----- 
+
+Agent Framework Model :
+An agent framework allows you to build your controller as an application with the Aries agent embedded in your controller as a library. 
+The controller uses the library to drive the agent according to the needs of your application. 
+With a framework, you are constrained to the languages that you can use with that framework—this is because the language you use must support embedding the agent framework. 
+As of this writing (September/October 2019), there is a complete framework based on .NET (aries-framework-dotnet) and one well into development based on golang (aries-framework-go). 
+As well, there are groups looking at creating Java- and JavaScript-based frameworks.
+
+Cloud Agent Model :
+The cloud agent model, as embodied by aries-cloudagent-python, separates the controller and agent into processes communicating using an HTTP API.
+
+Trade Offs:
+If you are building a non-mobile agent and you want an easy way to integrate the agent with your existing systems, regardless of the language, 
+the cloud agent model is a great way to go. If you are building a brand new app that will operate standalone, either model will work, 
+and you will want to think about what fits best into your technical environment.
+If you are building a mobile agent, you will need to use an Aries framework, with .NET and Xamarin the current best option. 
+Since Python is not readily supported on mobile platforms, the cloud agent model is currently not an option for mobile implementations.
+
+
+Why We Need Identity Solutions:
+
+BCovrin sandbox test network
+
+The Indy Genesis File:
+The genesis file contains information about the physical endpoints (IP addresses and ports) for some or all of the nodes in the ledger pool, 
+and the cryptographic material necessary to communicate with those nodes. 
+
+
+Agent Start Up:
+An Aries agent needs to know a lot of configuration information as it starts up. For example, it needs to know:
+	The location of the genesis file for the ledger it will use (if any).
+        If it needs to create items (DIDs, schema, etc.) on the ledger, how to do that, or how to find them if they have already been created.
+        Transport (such as HTTP or web sockets) endpoints for messaging other agents.
+        Storage options for keys and other data.
+        Interface details between the agent framework and the controller for events and requests.
+
+Provision: is intended to be used one time per agent instance to establish a wallet and the required ledger objects.
+Start    : is used for normal operations and assumes that everything is in place in the wallet and ledger.
+
+
+Startup Option Groups:
+The ACA-Py startup options are divided into a number of groups, as outlined in the following:
+1. Debug: Options for development and debugging. Most (those prefixed with "auto-") implement default controller behaviors so the agent can run without a separate controller. Several options enable extra logging around specific events, such as when establishing a connection with another agent.
+2. Admin: Options to configure the connection between ACA-Py and its controller, such as on what endpoint and port the controller should send requests. Important required parameters include if and how the ACA-Py/controller interface is secured.
+3. General: Options about extensions (external Python modules) that can be added to an ACA-Py instance and where non-Indy objects are stored (such as connections and protocol state objects).
+4. Ledger: Options that provide different ways for the agent to connect to a ledger.
+5. Logging: Options for setting the level of logging for the agent and to where the logging information is to be stored.
+6. Protocol: Options for special handling of several of the core protocols. We’ll be going into a deeper discussion of protocols in the next chapter.
+7. Transport: Options about the interfaces that are to be used for connections and messaging with other agents.
+8. Wallet: Options related to the storage of keys, DIDs, Indy ledger objects and credentials. This includes the type of database (e.g. SQLite or PostgreSQL) and credentials for accessing the database.
+
+
+
+Setup a connections:
+1. First copy invitations from faber and paste it to alice to create receiver and establish a connection.
+2. Once it is successfully copy it it will establish a connection and it can be seen on ( /connection ).
+3. To give schema to alice faber will define schema in post schema ( /schemas ).
+4. Paste schema id in credential-definitions and schema is generated successfully.
+
+
+
+{
+  "auto_remove": true,
+  "comment": "string",
+  "connection_id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+  "credential_proposal": {
+    "@type": "issue-credential/1.0/credential-preview",
+    "attributes": [
+      {
+        "mime-type": "image/jpeg",
+        "name": "favourite_drink",
+        "value": "martini"
+      }
+    ]
+  },
+  "issuer_did": "WgWxqztrNooG92RXvxSTWv",
+  "schema_id": "WgWxqztrNooG92RXvxSTWv:2:schema_name:1.0",
+  "schema_issuer_did": "WgWxqztrNooG92RXvxSTWv",
+  "schema_name": "preferences",
+  "schema_version": "1.0",
+  "trace": false
+}
+
+
+
+{
+  "cred_def_id": "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag",
+  "schema_name": "name_email_schema",
+  "schema_version": "1.0",
+  "connection_id": "cf42acbf-d2b8-4e58-9c7d-4fcf43a2b12c",
+  "issuer_did": "KNoxJCZoJycfNRhoDFHSPK",
+  "schema_id": "KNoxJCZoJycfNRhoDFHSPK:2:name_email_schema:1.0",
+  "schema_issuer_did": "KNoxJCZoJycfNRhoDFHSPK",
+  "comment": "string",
+  "credential_proposal": {
+    "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/1.0/credential-preview",
+    "attributes": [
+      {
+        "name": "name",
+        "value": "Himangshu Pan"
+      },
+      {
+        "name": "email",
+        "value": "himangshu@klizos.com"
+      }
+    ]
+  }
+}
+
+

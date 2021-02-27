@@ -1,0 +1,67 @@
+Before Cloud Computing:
+
+Challenges:
+1. Invest Heavily for setup
+2. Invest in Resources
+3. Scalability
+4. Less time to focus on Business
+
+How Cloud Computing Helps?
+1. Cloud Computing is Analogous to Electricity Supply.
+2. You Pay what you Use.
+3. Somebody Else Manages the Services.
+
+What is cloud Computing:
+==> Features
+1. Pay as you go
+2. Scalable
+3. Flexible
+4. Secure and Disaster Recovery
+
+Cloud Service Models:
+1. IaaS (Infrastructure Given):
+   In IaaS, i will decide what types of os, network, security everything is decided by developers.
+   eg. ec2
+
+2. SaaS (Readymade Software):
+   Every is made without anythings is done by developers/
+   eg. gmail(Don't know about storage etc).
+
+3. PaaS (Configured Platform):
+   Everything a made just to put code and store data.
+
+Cloud Deployment Models:
+1. Public
+	Public Dataserver (Different company also have data there in Datacenter).    
+	Common datacenter.
+
+2. Private
+	Where Datacenter which is total private.
+	You own that Datacenter
+	Critical Data is stored
+	Highly costly
+	
+3. Hybrid
+	Private data as well as public data then use Hybrid models.
+	Less cheap than private models.
+ 
+4. Community
+	When multiple people work from different locations then use community models
+
+Cloud Computing Myths:
+1. CC costs job(It will takes job).
+2. Cloud is for Techies Alone.
+3. CC is Not Safe
+4. Cloud is Just for Virtualization(You are using machine).
+
+Cloud Service Providers:
+1. AWS
+2. AZURE
+3. GCP
+4. IBM Cloud
+
+AWS and AZURE have some similar service
+
+
+AWS(Amazon web Service):
+

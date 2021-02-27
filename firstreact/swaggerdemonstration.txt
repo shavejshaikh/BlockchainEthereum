@@ -1,0 +1,3 @@
+Issuer/faber generate schema id : GeLnxcvucoJPdepEoQ6nCS:2:name_email_schema:1.0
+Issuer/faber generate credential definitio id : GeLnxcvucoJPdepEoQ6nCS:3:CL:12:name_email
+Holder/ALice generate connection id : ca626cba-44b4-41a0-949e-4e9297092406  , ee84d49b-f0ae-4ed0-b5ce-4584d7b0ff5b , c0ad920b-5906-48de-a2f1-2d7ac5956f18

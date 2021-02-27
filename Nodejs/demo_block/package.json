@@ -1,0 +1,21 @@
+{
+  "name": "demo_block",
+  "version": "1.0.0",
+  "description": "This is blockchain first session",
+  "main": "sever.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "babel-node -- server.js"
+  },
+  "author": "Shavej",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^7.1.4",
+    "web3": "^1.2.6"
+  },
+  "dependencies": {}
+}

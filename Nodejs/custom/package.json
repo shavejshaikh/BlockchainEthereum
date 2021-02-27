@@ -1,0 +1,15 @@
+{
+  "name": "custom",
+  "version": "1.0.0",
+  "description": "How to make custom modules",
+  "main": "testmath.js",
+  "scripts": {
+   "start":"node testmath.js"
+  },
+  "keywords": [
+    "nodejs",
+    "expressjs"
+  ],
+  "author": "shavej",
+  "license": "ISC"
+}

@@ -1,0 +1,18 @@
+Request response format:
+Use Content-Type: application/json header with all PUT and POST requests 
+except when uploading documents or live photos.
+
+
+1. For collect user data in a frontend of your application using Onfido input capture SDKs.
+2. Where the picture and document are going to store.
+3. What is webhooks.
+4. How it works. 
+5. How check Operation is going to perform 
+6. For 1 Applicants how many report id are there. (Multiple)
+
+
+
+1. How to check which user is login in
+2. How to get current user ID
+3. How to maintain connect with ledger and Onfido
+ 

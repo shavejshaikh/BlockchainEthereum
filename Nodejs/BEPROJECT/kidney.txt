@@ -1,0 +1,148 @@
+
+
+pragma solidity ^0.5.0;
+
+contract Kidneyblock
+{
+    uint public taskcount=0;
+    struct Donor
+    {
+        uint id;
+        string name;
+        bool completed;
+    }
+    
+    
+    mapping(uint=>Donor) public donors;
+    
+    constructor() public
+    {
+        createDonor("Check out");
+    }
+    
+    function createDonor(string memory _name)public
+    {
+        taskcount ++;
+        donors[taskcount]=Donor(taskcount, _name,false);
+    }
+    
+}
+
+
+
+
+
+
+ /*struct donor
+    {
+        uint id;
+        string name;
+        uint mobile_no;
+        string blood_group;
+    }
+    
+    
+    struct receiver
+    {
+        uint id;
+        string name;
+        uint mobile_no;
+        string blood_group;
+    }
+    
+    mapping(uint=>donor) public donors;
+    mapping(uint=>receiver) public receivers;
+    
+    function registerdonor(uint _id,string _name,uint _mobile_no,string _blood_group)
+    {
+        donor d=donors[msg.sender];
+        d.id=_id;
+        d.name=_name;
+        d.mobile_no=_mobile_no;
+        d.blood_group=_blood_group;
+    }
+    
+    function registerreceiver(uint _id,string _name,uint _mobile_no,string _blood_group)
+    {
+        receiver r=receivers[msg.sender];
+        r.id=_id;
+        r.name=_name;
+        r.mobile_no=_mobile_no;
+        r.blood_group=_blood_group;
+    }
+    
+    
+   address public buyer;
+   address public seller;
+   uint public deposit;
+   uint public timetoexpiry;
+   uint public startTime;
+   
+   function escrow(address _seller,uint _timetoexpiry)
+   {
+       buyer=msg.sender;
+       seller=_seller;
+       deposit=msg.value;
+       timetoexpiry=_timetoexpiry;
+       startTime=now;
+   }
+   //buyer
+   function release()
+   {
+       if(msg.sender==buyer)
+       {
+           suicide(seller);
+           
+       }
+       else
+       {
+           throw;
+       }
+   }
+   
+   
+   function withdrw()
+   {
+       if(!isExpired())
+       {
+           throw;
+       }
+       if(msg.sender==buyer)
+       {
+           suicide(buyer);
+       }
+       else
+       {
+           throw;
+       }
+   }
+   
+   function cancel()
+   {
+       if(msg.sender==seller)
+       {
+           suicide(buyer);
+           
+       }
+        else
+       {
+           throw;
+       }
+   }
+   
+   function isExpired() constant returns (bool)
+   {
+       if(now> startTime+timetoexpiry)
+       {
+           return true;
+       }
+       else
+       {
+           return false;
+       }
+   }
+   */
+
+
+
+
